@@ -1,0 +1,16 @@
+fields:
+    title:
+        label: Title
+        oc.commentPosition: ''
+        span: auto
+        type: text
+    description:
+        label: Description
+        size: large
+        oc.commentPosition: ''
+        span: auto
+        type: textarea
+    status:
+        label: Status
+        span: auto
+        type: switch

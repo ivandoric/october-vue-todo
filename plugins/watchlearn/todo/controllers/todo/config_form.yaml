@@ -1,0 +1,10 @@
+name: Todo
+form: $/watchlearn/todo/models/todo/fields.yaml
+modelClass: Watchlearn\Todo\Models\Todo
+defaultRedirect: watchlearn/todo/todo
+create:
+    redirect: 'watchlearn/todo/todo/update/:id'
+    redirectClose: watchlearn/todo/todo
+update:
+    redirect: watchlearn/todo/todo
+    redirectClose: watchlearn/todo/todo

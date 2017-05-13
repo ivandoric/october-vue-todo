@@ -17,6 +17,8 @@ selenium.php
 composer.lock
 node_modules
 /vue-todo/node_modules
+todo.sublime-project
+todo.sublime-workspace
 
 # for netbeans
 nbproject

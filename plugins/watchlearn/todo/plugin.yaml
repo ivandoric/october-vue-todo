@@ -1,0 +1,11 @@
+plugin:
+    name: 'watchlearn.todo::lang.plugin.name'
+    description: 'watchlearn.todo::lang.plugin.description'
+    author: Watchlearn
+    icon: oc-icon-list
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: Todos
+        url: watchlearn/todo/todo
+        icon: icon-list
