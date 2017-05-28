@@ -1,34 +1,18 @@
 <template>
     <div>
-        <h1>My New Component</h1>
-
-        <ul>
-            <li v-for="todo in todos">
-                <h3>{{ todo.title }}</h3> 
-                {{ todo.description }}
-            </li>
-        </ul>
+        <todo v-for="todo in todos" :todo="todo" :key="todo.id"></todo>
     </div>
 </template>
 
 <script type="text/javascript">
     import axios from 'axios';
+    import todo from './todo';
 
     export default {
         name: 'TodoList',
-        data: function(){
-            return {
-                todos: []
-            }
-        },
-
-        mounted: function() {
-            var _self = this;
-
-            axios.get('http://todo.dev/api/todos').then(function (response){
-                _self.todos = response.data;
-            })
-
+        props: ['todos'],
+        components: {
+            todo
         }
     }
 </script>
