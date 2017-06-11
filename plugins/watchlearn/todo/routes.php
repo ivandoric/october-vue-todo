@@ -1,6 +1,7 @@
 <?php 
 
 use Watchlearn\Todo\Models\Todo;
+use Illuminate\Http\Request;
 
 Route::get('api/populate', function(){
     $faker = Faker\Factory::create();
@@ -22,6 +23,16 @@ Route::get('api/todos', function() {
     $todos = Todo::all();
 
     return $todos;
+});
+
+Route::post('api/add-todo', function(Request $req){
+    $data = $req->input();
+
+    Todo::create([
+        'title' => $data['title'],
+        'description' => $data['description'],
+        'status' => $data['status']
+    ]);
 });
 
 
