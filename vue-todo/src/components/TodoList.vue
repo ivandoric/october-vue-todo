@@ -1,6 +1,16 @@
 <template>
     <div>
-        <todo v-for="todo in todos" :todo="todo" :key="todo.id"></todo>
+        <div class="row">
+            <div class="columns large-6">
+                <h2>Uncompleted ({{ uncompletedTodos.length }})</h2>
+                <todo v-for="todo in uncompletedTodos" :todo="todo" :key="todo.id"></todo>
+            </div>
+
+            <div class="columns large-6">
+                <h2>Completed ({{ completedTodos.length }})</h2>
+                <todo v-for="todo in completedTodos" :todo="todo" :key="todo.id"></todo>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -13,6 +23,19 @@
         props: ['todos'],
         components: {
             todo
+        },
+
+        computed: {
+            completedTodos: function () {
+                return this.todos.filter(function(todo){
+                    return todo.status == 1;
+                })
+            },
+            uncompletedTodos: function () {
+                return this.todos.filter(function(todo){
+                    return todo.status == 0;
+                })
+            }
         }
     }
 </script>
