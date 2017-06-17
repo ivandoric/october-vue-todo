@@ -35,4 +35,10 @@ Route::post('api/add-todo', function(Request $req){
     ]);
 });
 
+Route::post('api/delete-todo', function(Request $req){
+    $data = $req->input();
+
+    Todo::destroy($data['id']);
+});
+
 
