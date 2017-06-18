@@ -41,4 +41,9 @@ Route::post('api/delete-todo', function(Request $req){
     Todo::destroy($data['id']);
 });
 
+Route::post('api/toggle-todo', function(Request $req){
+    $data = $req->input();
+
+    Todo::where('id', $data['id'])->update(['status' => $data['status']]);
+});
 

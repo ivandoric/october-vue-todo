@@ -3,12 +3,12 @@
         <div class="row">
             <div class="columns large-6">
                 <h2>Uncompleted ({{ uncompletedTodos.length }})</h2>
-                <todo v-for="todo in uncompletedTodos" :todo="todo" :key="todo.id" @delete-todo="deleteTodo(todo)"></todo>
+                <todo v-for="todo in uncompletedTodos" :todo="todo" :key="todo.id" @delete-todo="deleteTodo(todo)" @toggle-todo="toggleTodo(todo)"></todo>
             </div>
 
             <div class="columns large-6">
                 <h2>Completed ({{ completedTodos.length }})</h2>
-                <todo v-for="todo in completedTodos" :todo="todo" :key="todo.id" @delete-todo="deleteTodo(todo)"></todo>
+                <todo v-for="todo in completedTodos" :todo="todo" :key="todo.id" @delete-todo="deleteTodo(todo)" @toggle-todo="toggleTodo(todo)"></todo>
             </div>
         </div>
     </div>
@@ -48,6 +48,15 @@
                 this.todos.splice(todoIndex, 1);
 
                 axios.post('http://todo.dev/api/delete-todo', todo);
+            },
+            toggleTodo: function(todo) {
+                if(todo.status == 1) {
+                    todo.status = 0;
+                } else {
+                    todo.status = 1;
+                }
+
+                axios.post('http://todo.dev/api/toggle-todo', todo);
             }
         }
     }
