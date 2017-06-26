@@ -47,3 +47,16 @@ Route::post('api/toggle-todo', function(Request $req){
     Todo::where('id', $data['id'])->update(['status' => $data['status']]);
 });
 
+Route::post('api/update-todo', function(Request $req){
+    $data = $req->input();
+
+    Todo::where('id', $data['id'])
+    ->update([
+        'status' => $data['status'],
+        'title' => $data['title'],
+        'description' => $data['description']
+    ]);
+});
+
+
+

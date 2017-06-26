@@ -5,20 +5,35 @@
                 <button class="todo-complete-icon" :class="{completed: todo.status == 1}"  @click="toggleTodo(todo)"></button>
             </div>
 
-            <div class="columns large-11">
+            <div class="columns large-11" v-show="!editing">
                 <h3>{{ todo.title }}</h3>
                 <p>{{ todo.description }}</p>
-                
+                <button class="button primary" v-on:click="showForm">Edit</button>
                 <button class="button alert" v-on:click="deleteTodo(todo)">Delete</button>
+            </div>
+
+            <div class="columns large-11" v-show="editing">
+                <input type="text" placeholder="Enter title" v-model="todo.title" ref="title">
+                <textarea placeholder="Enter description" v-model="todo.description" ref="project"></textarea>
+                
+                <button class="button success" v-on:click="updateTodo(todo.id, todo.title, todo.description, todo.status)">Update &amp; Close</button>
+                <button class="button alert" v-on:click="closeForm">Cancel</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         name: 'todo',
         props: ['todo'],
+        data: function() {
+            return {
+                editing: false
+            }
+        },
 
         methods: {
             deleteTodo: function(todo) {
@@ -26,6 +41,25 @@
             },
             toggleTodo: function(todo) {
                 this.$emit('toggle-todo', todo);
+            },
+
+            showForm: function() {
+                this.editing = true;
+            },
+            closeForm: function() {
+                this.editing = false;
+            },
+            updateTodo: function(id, title, description, status) {
+                var data = {
+                    id: id,
+                    title: title,
+                    description: description,
+                    status: status
+                }
+
+                axios.post('http://todo.dev/api/update-todo', data);
+
+                this.editing = false;
             }
         }
     }
